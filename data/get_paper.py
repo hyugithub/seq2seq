@@ -19,6 +19,7 @@ import csv
 
 list_journals = ["../../site/issues/sample.html"]
 
+papers = []
 for fname in list_journals:    
     html = open(fname, 'r', encoding='utf-8')
     mystr = html.read() 
@@ -29,7 +30,11 @@ for fname in list_journals:
         string = rows['href']
 #        print(string)
         if "/qk/" in string and "html" in string:
-      	    print(string)
+      	    #print(string)
+            papers.append("http://lib.cqvip.com"+string)
             #issue_list.append("http://lib.cqvip.com"+string)
 #print(issue_list)
 
+with open("paper.txt", 'w') as myfile:
+    for j in papers:
+        print(j, file=myfile)
