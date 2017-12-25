@@ -14,11 +14,15 @@ class MySpider(scrapy.Spider):
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
+        with open("../../site/cpvip.log", 'a') as logfile:
+            logfile.write(urls[-1]+"\n")
+
     def parse(self, response):
         page = response.url.split("/")[-2]
         filename = '../../site/quotes-%s.html' % page
         with open(filename, 'wb') as f:
             f.write(response.body)
+
         self.log('Saved file %s' % filename)
 
 process = CrawlerProcess({ \
