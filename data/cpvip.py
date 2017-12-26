@@ -6,7 +6,13 @@ import sys
 
 ts = time.time()
 list_journals = []
-with open("/data/paper.txt", 'r', encoding='utf-8') as f:
+
+#fname = "/data/paper.txt"
+fname = "null.txt"
+if len(sys.argv) > 1:
+    fname = sys.argv[1]
+
+with open(fname, 'r', encoding='utf-8') as f:
     f2 = f.read()
     list_journals = f2.split("\n")    
     print("raw entry: ", len(list_journals))
@@ -27,7 +33,11 @@ step = 10
 end = start+step
 
 class MySpider(scrapy.Spider):
-    name = "quotes"
+    name = "Google Analytics"
+    custom_settings = {
+        "AUTOTHROTTLE_ENABLED": True,
+        "AUTOTHROTTLE_START_DELAY": 5.0
+    }
 
     def __init__(self):
         self.start = 0
@@ -42,8 +52,8 @@ class MySpider(scrapy.Spider):
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
-        with open("/data/log/cpvip.log", 'a') as logfile:
-            logfile.write(urls[-1]+"\n")
+        #with open("/data/log/cpvip.log", 'a') as logfile:
+        #    logfile.write(urls[-1]+"\n")
 
     def parse(self, response):
         page = response.url
