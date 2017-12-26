@@ -5,19 +5,20 @@ import urllib.request
 import requests
 import csv
 
-#list_journals = []
-#with open("C:/Users/hyu/temp/cpvip/data/journal/journal_list.txt", 'r', encoding='utf-8') as f:
-#    f2 = f.read()
-#    list_journals = f2.split("\n")    
-#    print(len(list_journals))
-#    print("done")
-    
-#list_journals = [path+f for f in list_journals]    
+list_journals = []
+with open("../../site/issues/issue_list.txt", 'r', encoding='utf-8') as f:
+    f2 = f.read()
+    list_journals = f2.split("\n")    
+    print(len(list_journals))
+    print("done")
 
-#list_journals = list_journals[0:2]
+path = "../../site/issues/"    
+list_journals = [path+f for f in list_journals]    
+
+list_journals = list_journals[0:2000]
 #print(list_journals)
 
-list_journals = ["../../site/issues/sample.html"]
+#list_journals = ["../../site/issues/sample.html"]
 
 papers = []
 for fname in list_journals:    
