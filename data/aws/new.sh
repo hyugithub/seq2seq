@@ -1,0 +1,1 @@
+/home/ubuntu/anaconda3/bin/aws ec2 run-instances --image-id ami-89ce8cf3 --key-name TODO --security-group-ids sg-9001b9ee sg-e16d9c95 --instance-type c3.large --user-data file://~/script/script_$1.sh --count 1 --instance-initiated-shutdown-behavior terminate
